@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://fham243d5bai"]
+[gd_scene load_steps=3 format=3 uid="uid://fham243d5bai"]
+
+[ext_resource type="PackedScene" uid="uid://onibhll75thl" path="res://Components/wall.tscn" id="1_4efng"]
+[ext_resource type="PackedScene" uid="uid://bhw4lwg6abw3n" path="res://Components/player.tscn" id="2_21xyl"]
 
 [node name="test_level" type="Node2D"]
+
+[node name="wall" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(64, 576)
+
+[node name="wall2" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(192, 576)
+
+[node name="wall3" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(448, 576)
+
+[node name="wall4" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(320, 576)
+
+[node name="Player" parent="." instance=ExtResource("2_21xyl")]
+position = Vector2(64, 320)
