@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var hurtbox = preload("res://Components/hurtbox.tscn")
 
 const ACCEL = 166.66
 const DECEL = 166.66
@@ -13,6 +14,9 @@ var can_jump = false
 var used_jump = false
 var coyote_time = 0
 var variable_time = 0
+
+var hp = 5
+var invuln = 0
 
 func jump(delta):
 	if Input.is_action_just_pressed("jump") and coyote_time < 5 and not used_jump:
@@ -44,3 +48,12 @@ func _physics_process(delta):
 	velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("attack"):
+		var instance = hurtbox.instantiate()
+		add_child(instance)
+		
+	if hp <= 0:
+		get_tree().reload_current_scene()
+	
+	invuln += delta

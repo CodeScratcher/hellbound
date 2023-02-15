@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://onibhll75thl"]
-
-[ext_resource type="Texture2D" uid="uid://c1ci6jf776ovt" path="res://icon.svg" id="1_sht3k"]
+[gd_scene load_steps=4 format=3 uid="uid://onibhll75thl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfcr5"]
 size = Vector2(128, 128)
+
+[sub_resource type="Gradient" id="Gradient_l2i48"]
+offsets = PackedFloat32Array(0, 0.0451613)
+colors = PackedColorArray(0, 0.741176, 0.392157, 1, 0, 0.741176, 0.392157, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jjg2p"]
+gradient = SubResource("Gradient_l2i48")
 
 [node name="wall" type="StaticBody2D"]
 
@@ -11,4 +16,6 @@ size = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_yfcr5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_sht3k")
+position = Vector2(-1.90735e-06, 1.90735e-06)
+scale = Vector2(2, 2)
+texture = SubResource("GradientTexture2D_jjg2p")
