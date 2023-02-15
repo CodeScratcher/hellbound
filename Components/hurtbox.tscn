@@ -13,6 +13,7 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_nl6gj")
 
 [node name="hurtbox" type="Area2D" groups=["hurt"]]
+collision_layer = 3
 script = ExtResource("1_abnui")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

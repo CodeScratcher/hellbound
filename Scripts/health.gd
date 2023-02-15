@@ -1,6 +1,6 @@
-extends Area2D
+extends Label
 
-var timer = 0
+@onready var player = get_node("../../player")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -8,6 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	timer += delta
-	if timer >= 0.1:
-		queue_free()
+	text = "Health: " + str(player.hp)

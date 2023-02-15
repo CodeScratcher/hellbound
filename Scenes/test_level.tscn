@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://fham243d5bai"]
+[gd_scene load_steps=10 format=3 uid="uid://fham243d5bai"]
 
 [ext_resource type="PackedScene" uid="uid://onibhll75thl" path="res://Components/wall.tscn" id="1_4efng"]
 [ext_resource type="PackedScene" uid="uid://bhw4lwg6abw3n" path="res://Components/player.tscn" id="2_21xyl"]
 [ext_resource type="PackedScene" uid="uid://d4efepl1wygnx" path="res://Components/enemy.tscn" id="3_psmj0"]
+[ext_resource type="PackedScene" uid="uid://bg4iqk68d7hop" path="res://Components/ui.tscn" id="4_qr2nd"]
+[ext_resource type="Script" path="res://Scripts/pickup_scythe.gd" id="5_uw8xm"]
+
+[sub_resource type="Curve2D" id="Curve2D_gp3ou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw3kt"]
+size = Vector2(94, 198)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb7nf"]
+size = Vector2(128, 120)
+
+[sub_resource type="SystemFont" id="SystemFont_an75a"]
 
 [node name="test_level" type="Node2D"]
 
@@ -18,8 +30,97 @@ position = Vector2(448, 576)
 [node name="wall4" parent="." instance=ExtResource("1_4efng")]
 position = Vector2(320, 576)
 
-[node name="Player" parent="." instance=ExtResource("2_21xyl")]
+[node name="player" parent="." instance=ExtResource("2_21xyl")]
 position = Vector2(64, 320)
 
 [node name="enemy" parent="." instance=ExtResource("3_psmj0")]
 position = Vector2(448, 448)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gp3ou")
+
+[node name="trigger" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger"]
+position = Vector2(-48, 496)
+shape = SubResource("RectangleShape2D_iw3kt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="trigger"]
+position = Vector2(560, 480)
+shape = SubResource("RectangleShape2D_iw3kt")
+
+[node name="ui" parent="." instance=ExtResource("4_qr2nd")]
+
+[node name="trigger2" type="StaticBody2D" parent="."]
+position = Vector2(1040, 344)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trigger2"]
+position = Vector2(8, 504)
+shape = SubResource("RectangleShape2D_iw3kt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="trigger2"]
+position = Vector2(560, 480)
+shape = SubResource("RectangleShape2D_iw3kt")
+
+[node name="wall5" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(1104, 912)
+
+[node name="wall6" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(1232, 912)
+
+[node name="wall7" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(1360, 912)
+
+[node name="wall8" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(1488, 912)
+
+[node name="enemy2" parent="." instance=ExtResource("3_psmj0")]
+position = Vector2(1272, 784)
+
+[node name="wall9" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(2040, 968)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1232, 912)
+script = ExtResource("5_uw8xm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(808, -68)
+shape = SubResource("RectangleShape2D_kb7nf")
+
+[node name="PopupPanel" type="Window" parent="Area2D"]
+title = "Scythe"
+position = Vector2i(500, 250)
+size = Vector2i(300, 100)
+visible = false
+unresizable = true
+popup_window = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Area2D/PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+size_flags_horizontal = 6
+theme_override_fonts/normal_font = SubResource("SystemFont_an75a")
+text = "Use the scythe with X"
+
+[node name="wall10" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(576, 640)
+
+[node name="wall11" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(704, 704)
+
+[node name="wall12" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(832, 768)
+
+[node name="wall13" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(960, 832)
+
+[node name="wall14" parent="." instance=ExtResource("1_4efng")]
+position = Vector2(1032, 888)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="close_requested" from="Area2D/PopupPanel" to="Area2D" method="_on_popup_panel_close_requested"]
